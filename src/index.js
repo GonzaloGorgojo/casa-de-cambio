@@ -13,7 +13,7 @@ function obtenerDatos() {
     return fetch('https://api.exchangeratesapi.io/latest')
         .then((respuesta) => respuesta.json())
         .then((respuesta) => respuesta.rates)
-        .then((monedas) => Object.keys(monedas))
+        .then((monedas) => Object.keys(monedas).concat('EUR'))
         .then((monedas) => mostrarMonedas(monedas))
 }
 
