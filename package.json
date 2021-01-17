@@ -4,8 +4,13 @@
   "description": "Interfaz para mostrar los tipos de cambios utilizando APIs",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "author": "Gonzalo Gorgojo",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^6.2.1"
+  }
 }

@@ -10,15 +10,15 @@ function mostrarFechaActual() {
 }
 
 function obtenerDatos() {
-    return fetch('https://api.exchangeratesapi.io/latest?base=USD')
+    return fetch('https://api.exchangeratesapi.io/latest')
         .then((respuesta) => respuesta.json())
         .then((respuesta) => respuesta.rates)
-        .then((monedas) => Object.keys(monedas).concat('EUR'))
+        .then((monedas) => Object.keys(monedas))
         .then((monedas) => mostrarMonedas(monedas))
 }
 
 function mostrarMonedas(monedas) {
-    monedas.forEach(base => {
+    monedas.sort().forEach(base => {
         const $item = document.createElement('option');
         $item.value = base;
         $item.textContent = base;
@@ -48,11 +48,15 @@ function pedirCambios(monedaSeleccionada, fechaSeleccionada) {
         .then(response => response.json())
         .then((respuesta) => respuesta.rates)
         .then((valor) => {
-            crearTabla(valor);
+            crearTabla(valor, monedaSeleccionada);
         });
 }
 
-function crearTabla(valor) {
+function crearTabla(valor, monedaSeleccionada) {
+    if (monedaSeleccionada == 'EUR') {
+        let eur = { 'EUR': "1" };
+        valor = { ...valor, ...eur };
+    }
     const $tabla = document.querySelector('#tabla tbody');
     $tabla.innerHTML = '';
     Object.keys(valor).sort().forEach((moneda, i) => {
